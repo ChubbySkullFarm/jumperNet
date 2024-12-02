@@ -12,7 +12,7 @@ extern crate alloc;
 use alloc::vec::Vec;
 use sp_runtime::{
 	create_runtime_str, generic, impl_opaque_keys,
-	traits::{BlakeTwo256, IdentifyAccount, Verify},
+	traits::{BlakeTwo256, IdentifyAccount, Verify, parameter_types},
 	MultiAddress, MultiSignature,
 };
 #[cfg(feature = "std")]
@@ -102,7 +102,7 @@ pub const MILLI_UNIT: Balance = 1_000_000_000;
 pub const MICRO_UNIT: Balance = 1_000_000;
 
 /// Existential deposit.
-pub const EXISTENTIAL_DEPOSIT: Balance = MILLI_UNIT;
+pub const EXISTENTIAL_DEPOSIT: Balance = MICRO_UNIT;
 
 /// The version information used to identify this runtime when compiled natively.
 #[cfg(feature = "std")]
@@ -143,6 +143,10 @@ pub type SignedBlock = generic::SignedBlock<Block>;
 
 /// BlockId type as expected by this runtime.
 pub type BlockId = generic::BlockId<Block>;
+
+pub type AccountData = pallet_balances::AccountData<<Runtime as pallet_balances::Config>::Balance>;
+
+pub type AccountStore = System;
 
 /// The SignedExtension to the basic transaction logic.
 pub type SignedExtra = (
@@ -221,4 +225,18 @@ mod runtime {
 	// Include the custom logic from the pallet-template in the runtime.
 	#[runtime::pallet_index(7)]
 	pub type TemplateModule = pallet_template;
+
+    #[runtime::pallet_index(8)]
+    pub type Smokejumper = pallet_smokejumper;
+}
+
+parameter_types! {
+    pub const MaxLength: u32 = 69;
+}
+
+impl pallet_smokejumper::Config for Runtime {
+    type RuntimeEvent = RuntimeEvent;
+    type WeightInfo = ();
+    type MaxLength = MaxLength;
+    type NativeBalance = Balances;
 }
