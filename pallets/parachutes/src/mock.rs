@@ -1,5 +1,5 @@
-use crate as pallet_smokejumper;
-use frame_support::{derive_impl, pallet_prelude::*, parameter_types};
+use crate as pallet_parachutes;
+use frame_support::{derive_impl, parameter_types};
 use sp_runtime::BuildStorage;
 
 type Block = frame_system::mocking::MockBlock<Test>;
@@ -30,6 +30,9 @@ mod runtime {
 
 	#[runtime::pallet_index(2)]
 	pub type Smokejumper = pallet_smokejumper::Pallet<Test>;
+
+	#[runtime::pallet_index(3)]
+	pub type Parachutes = pallet_parachutes::Pallet<Test>;
 }
 
 #[derive_impl(frame_system::config_preludes::TestDefaultConfig)]
@@ -44,7 +47,7 @@ impl pallet_balances::Config for Test {
 }
 
 parameter_types! {
-	pub const MaxLength: u32 = 69;
+	pub const MaxLength: u32 = 20;
 }
 
 impl pallet_smokejumper::Config for Test {
@@ -52,6 +55,20 @@ impl pallet_smokejumper::Config for Test {
 	type NativeBalance = Balances;
 	type WeightInfo = ();
 	type MaxLength = MaxLength;
+}
+
+parameter_types! {
+	pub const MaxIdLen: u32 = 16;
+	pub const MaxRepairLen: u32 = 255;
+	pub const MaxRigs: u32 = 1_000;
+}
+
+impl pallet_parachutes::Config for Test {
+	type RuntimeEvent = RuntimeEvent;
+	type WeightInfo = ();
+	type MaxIdLen = MaxIdLen;
+	type MaxRepairLen = MaxRepairLen;
+	type MaxRigs = MaxRigs;
 }
 
 // Build genesis storage according to the mock runtime.

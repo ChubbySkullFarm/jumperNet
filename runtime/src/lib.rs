@@ -1,3 +1,7 @@
+//TODO:
+// Explore runtime/src/configs/mod.rs
+//  - This is where impl pallet_example::Config for Runtime {} went
+
 #![cfg_attr(not(feature = "std"), no_std)]
 
 #[cfg(feature = "std")]
@@ -12,7 +16,7 @@ extern crate alloc;
 use alloc::vec::Vec;
 use sp_runtime::{
 	create_runtime_str, generic, impl_opaque_keys,
-	traits::{BlakeTwo256, IdentifyAccount, Verify, parameter_types},
+	traits::{BlakeTwo256, IdentifyAccount, Verify},
 	MultiAddress, MultiSignature,
 };
 #[cfg(feature = "std")]
@@ -222,21 +226,9 @@ mod runtime {
 	#[runtime::pallet_index(6)]
 	pub type Sudo = pallet_sudo;
 
-	// Include the custom logic from the pallet-template in the runtime.
-	#[runtime::pallet_index(7)]
-	pub type TemplateModule = pallet_template;
+    #[runtime::pallet_index(7)]
+    pub type Smokejumper = pallet_smokejumper;
 
     #[runtime::pallet_index(8)]
-    pub type Smokejumper = pallet_smokejumper;
-}
-
-parameter_types! {
-    pub const MaxLength: u32 = 69;
-}
-
-impl pallet_smokejumper::Config for Runtime {
-    type RuntimeEvent = RuntimeEvent;
-    type WeightInfo = ();
-    type MaxLength = MaxLength;
-    type NativeBalance = Balances;
+    pub type Parachutes = pallet_parachutes;
 }

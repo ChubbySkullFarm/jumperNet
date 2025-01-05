@@ -155,8 +155,17 @@ impl pallet_sudo::Config for Runtime {
 	type WeightInfo = pallet_sudo::weights::SubstrateWeight<Runtime>;
 }
 
-/// Configure the pallet-template in pallets/template.
-impl pallet_template::Config for Runtime {
-	type RuntimeEvent = RuntimeEvent;
-	type WeightInfo = pallet_template::weights::SubstrateWeight<Runtime>;
+impl pallet_smokejumper::Config for Runtime {
+    type RuntimeEvent = RuntimeEvent;
+    type WeightInfo = pallet_smokejumper::weights::SubstrateWeight<Runtime>;
+    type MaxLength = ConstU32<69>;
+    type NativeBalance = Balances;
+}
+
+impl pallet_parachutes::Config for Runtime {
+    type RuntimeEvent = RuntimeEvent;
+    type WeightInfo = ();
+    type MaxIdLen = ConstU32<20>;
+    type MaxRigs = ConstU32<100_000>;
+    type MaxRepairLen = ConstU32<255>;
 }
