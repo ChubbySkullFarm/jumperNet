@@ -99,7 +99,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(2)]
-        #[pallet::weight(T::WeightInfo::swap_address())]
+        	#[pallet::weight(T::WeightInfo::swap_address())]
 		pub fn swap_address(
 			origin: OriginFor<T>,
 			smj: T::AccountId,
