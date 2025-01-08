@@ -268,7 +268,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(2)]
-        #[pallet::weight(T::WeightInfo::in_service())]
+        	#[pallet::weight(T::WeightInfo::in_service())]
 		pub fn in_service(
 			origin: OriginFor<T>,
 			rigger: T::AccountId,
