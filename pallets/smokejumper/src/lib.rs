@@ -87,7 +87,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(1)]
-        #[pallet::weight(T::WeightInfo::change_name())]
+        	#[pallet::weight(T::WeightInfo::change_name())]
 		pub fn change_name(
 			origin: OriginFor<T>,
 			smj: T::AccountId,
