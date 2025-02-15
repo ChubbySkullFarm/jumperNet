@@ -1,8 +1,6 @@
 #![cfg_attr(not(feature = "std"), no_std)]
 
 //TODO:
-// WEIGHTS
-// BENCHMARKING
 // append() instead of push()?
 // Work on properly defining types with traits
 //    - Move to separate module
